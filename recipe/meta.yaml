@@ -1,4 +1,4 @@
-{% set version = "0.1.10" %}
+{% set version = "0.1.12" %}
 
 package:
   name: plaid
@@ -6,11 +6,11 @@ package:
 
 source:
   url: https://github.com/PLAID-lib/plaid/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 4badb83285368f6e624251d56e1d7751bffa9d7a1815c74325b350c17eea0f7b  
+  sha256: 6cdaf909790db90be51b9f1b946f79a2d1708153602689692d721c67442c2ade    
 
 build:
   number: 0
-  skip: true  # [py<310 or py>313]
+  skip: true  # [py<311 or py>313]
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}    
   script: python -m pip install . --no-deps --ignore-installed -vv
@@ -32,13 +32,14 @@ requirements:
     - scikit-learn
     - pydantic
     - datasets >=3.0
+    - zarr
 
 test:
   requires:
     - bash  # [unix]
     - pytest
     - optuna
-    - muscat ==2.5
+    - muscat ==2.5.1
     - ipython
   imports:
     - plaid
